@@ -15,7 +15,6 @@ import org.springframework.social.connect.web.ConnectInterceptor;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.patreon.connect.PatreonConnectionFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +23,10 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.WebRequest;
 
-@Controller
-@RequestMapping("/connect")
+/**
+ * I don't think we need this class because the Oauth2 stuff works out of the box
+ */
+//@Controller
 public class PatreonConnectController {
 	
 	private final PatreonConnectionFactory connectionFactory;
