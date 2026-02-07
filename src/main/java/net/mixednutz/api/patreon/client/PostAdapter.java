@@ -3,6 +3,7 @@ package net.mixednutz.api.patreon.client;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.patreon.api.PatreonClient;
@@ -58,7 +59,7 @@ public class PostAdapter implements PostClient<PostForm>{
 		}
 		
 		return conn.getApi().getCampaigns().getTiers().stream()
-				.map(PatreonTier::new).toList();
+				.map(PatreonTier::new).collect(Collectors.toList());
 	}
 
 	@Override

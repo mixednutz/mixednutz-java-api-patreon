@@ -2,6 +2,7 @@ package net.mixednutz.api.patreon.client;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.patreon.api.PatreonClient;
@@ -34,12 +35,12 @@ public class TierAdapter implements RoleClient {
 		}
 		
 		return conn.getApi().getCampaigns().getTiers().stream()
-				.map(PatreonTier::new).toList();
+				.map(PatreonTier::new).collect(Collectors.toList());
 	}
 	
 	public List<PatreonTier> getRolesAssigned() {
 		return conn.getApi().getIdentity().getTiers().stream()
-				.map(PatreonTier::new).toList();
+				.map(PatreonTier::new).collect(Collectors.toList());
 	}
 	
 }

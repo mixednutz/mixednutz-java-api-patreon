@@ -3,6 +3,7 @@ package org.springframework.social.patreon.api.impl;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -60,13 +61,13 @@ public class PatreonTemplate extends AbstractOAuth2ApiBinding implements Patreon
 				.filter(m->"campaign".equals(m.get(TYPE)))
 				.filter(m->m.containsKey(ATTRIBUTES))
 				.map(m->convertToResource(m, Campaign.class))
-				.toList());	
+				.collect(Collectors.toList()));	
 		
 		identity.setTiers(included.stream()
 				.filter(m->"tier".equals(m.get(TYPE)))
 				.filter(m->m.containsKey(ATTRIBUTES))
 				.map(m->convertToResource(m, Tier.class))
-				.toList());
+				.collect(Collectors.toList()));
 		
 		return identity;
 	}
@@ -86,7 +87,7 @@ public class PatreonTemplate extends AbstractOAuth2ApiBinding implements Patreon
 		campaigns.setCampaigns(data.stream()
 			.filter(m->m.containsKey(ATTRIBUTES))
 			.map(m->convertToResource(m, Campaign.class))
-			.toList());
+			.collect(Collectors.toList()));
 		
 		
 		List<Map<String, Object>> included = response.getBody().getIncluded();
@@ -94,7 +95,7 @@ public class PatreonTemplate extends AbstractOAuth2ApiBinding implements Patreon
 			.filter(m->"tier".equals(m.get(TYPE)))
 			.filter(m->m.containsKey(ATTRIBUTES))
 			.map(m->convertToResource(m, Tier.class))
-			.toList());
+			.collect(Collectors.toList()));
 
 		return campaigns;
 	}
